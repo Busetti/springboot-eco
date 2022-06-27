@@ -1,0 +1,15 @@
+type Query {
+	allAuthors: [Author]
+	filterAuthors(filter: String): [Author]
+}
+
+type Author {
+	id: Int
+	name: String
+	booksWritten: [Book]
+}
+
+type Book {
+	bookId: Int
+	bookName: String
+}
