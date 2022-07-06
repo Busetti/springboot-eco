@@ -1,0 +1,18 @@
+# The Root Query for the application
+type Query {
+	allBooks: [Book]
+	filterBooks(filter: String): [Book]
+}
+
+
+type Book {
+	bookId: ID!
+	bookName: String
+	author: String
+	price: Float
+}
+
+# The Root Mutation for the application
+type Mutation {
+    createBook(bookName: String!, author: String!, price: Float!) : Book!
+}

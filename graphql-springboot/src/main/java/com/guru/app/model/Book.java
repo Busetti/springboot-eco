@@ -1,30 +1,20 @@
 package com.guru.app.model;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Book {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookId;
 	private String bookName;
+	private String author;
+	private Double price;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "id", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnore
-	private Author author;
-
-	
 	public Integer getBookId() {
 		return bookId;
 	}
@@ -41,28 +31,36 @@ public class Book {
 		this.bookName = bookName;
 	}
 
-	
-
-	public Author getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(Author author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	public Book() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Double getPrice() {
+		return price;
 	}
-	
-	
 
-	public Book(Integer bookId, String bookName, Author author) {
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Book(Integer bookId, String bookName, String author, Double price) {
 		super();
 		this.bookId = bookId;
 		this.bookName = bookName;
 		this.author = author;
+		this.price = price;
+	}
+
+	
+	public Book(String bookName, String author, Double price) {
+		super();
+		this.bookName = bookName;
+		this.author = author;
+		this.price = price;
 	}
 
 	@Override
@@ -72,8 +70,17 @@ public class Book {
 		builder.append(bookId);
 		builder.append(", bookName=");
 		builder.append(bookName);
+		builder.append(", author=");
+		builder.append(author);
+		builder.append(", price=");
+		builder.append(price);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }
